@@ -1,0 +1,55 @@
+<section class="page">
+  <h2 class="title">Каталог</h2>
+
+  <div class="grid">
+    <a
+      class="card"
+      *ngFor="let p of products"
+      [href]="p.link"
+      target="_blank"
+      rel="noopener"
+      title="Открыть на kaspi.kz"
+    >
+      <img class="thumb" [src]="p.image" [alt]="p.name" />
+
+      <div class="content">
+  <h3 class="name">{{ p.name }}</h3>
+  <p class="desc">{{ p.description }}</p>
+
+  <div class="meta">
+    <div class="price">{{ p.price | number }} ₸</div>
+
+    <div class="rating" aria-label="rating">
+      <span
+        class="star"
+        *ngFor="let s of stars"
+        [class.filled]="isStarFilled(s, p.rating)"
+        >★</span
+      >
+      <span class="badge">{{ p.rating }}</span>
+    </div>
+  </div>
+
+  <div class="share-row" (click)="$event.preventDefault(); $event.stopPropagation()">
+    <button class="share-btn" type="button" (click)="shareWhatsApp(p)">
+      Share WhatsApp
+    </button>
+
+    <button class="share-btn" type="button" (click)="shareTelegram(p)">
+      Share Telegram
+    </button>
+  </div>
+
+  <div class="gallery" (click)="$event.preventDefault()">
+    <img
+      class="gimg"
+      *ngFor="let img of p.images"
+      [src]="img"
+      [alt]="p.name + ' photo'"
+    />
+  </div>
+</div>
+
+    </a>
+  </div>
+</section>
