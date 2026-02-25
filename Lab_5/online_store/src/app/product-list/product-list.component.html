@@ -1,0 +1,12 @@
+<p class="empty" *ngIf="products.length === 0">
+  No products in this category
+</p>
+
+<div class="grid" *ngIf="products.length > 0">
+  <app-product-item
+    *ngFor="let p of products"
+    [product]="p"
+    (delete)="onDelete($event)"
+    (likeClick)="onLike($event)">
+  </app-product-item>
+</div>

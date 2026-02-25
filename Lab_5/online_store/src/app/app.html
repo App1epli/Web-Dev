@@ -1,0 +1,27 @@
+<div class="page">
+  <div class="header">
+    <h1 class="title">Online Store</h1>
+    <p class="subtitle">Choose a category and explore products</p>
+
+    <div class="categories">
+      <button
+        class="cat-btn"
+        *ngFor="let c of categories"
+        (click)="selectCategory(c.id)"
+        [class.active]="c.id === selectedCategoryId">
+        {{ c.name }}
+      </button>
+    </div>
+
+    <p class="hint" *ngIf="selectedCategoryId === null">
+      Select a category
+    </p>
+
+    <app-product-list
+      *ngIf="selectedCategoryId !== null"
+      [products]="filteredProducts"
+      (deleteProduct)="onDeleteProduct($event)"
+      (likeProduct)="onLikeProduct($event)">
+    </app-product-list>
+  </div>
+</div>

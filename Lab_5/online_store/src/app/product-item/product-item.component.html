@@ -1,0 +1,36 @@
+<article class="card">
+  <a class="thumb" [href]="product.link" target="_blank" rel="noopener">
+    <img [src]="product.image" [alt]="product.name" />
+  </a>
+
+  <div class="body">
+    <h3 class="name">{{ product.name }}</h3>
+
+    <p class="desc">{{ product.description }}</p>
+
+    <div class="info">
+      <span class="price">{{ product.price | number }} ₸</span>
+      <span class="rating">⭐ {{ product.rating }}</span>
+    </div>
+
+    <div class="actions">
+      <button class="btn like" type="button" (click)="onLike()">
+        ❤️ {{ product.likes ?? 0 }}
+      </button>
+
+      <button class="btn delete" type="button" (click)="requestDelete()">
+        🗑 Delete
+      </button>
+    </div>
+
+    <div class="share">
+      <button class="btn share-btn" type="button" (click)="shareWhatsApp()">
+        WhatsApp
+      </button>
+
+      <button class="btn share-btn" type="button" (click)="shareTelegram()">
+        Telegram
+      </button>
+    </div>
+  </div>
+</article>

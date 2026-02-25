@@ -1,0 +1,218 @@
+import { Injectable } from '@angular/core';
+import { Category } from '../models/category.model';
+import { Product } from '../models/product.model';
+
+@Injectable({ providedIn: 'root' })
+export class ProductService {
+
+  private categories: Category[] = [
+    { id: 1, name: 'Anime' },
+    { id: 2, name: 'Game' },
+    { id: 3, name: 'PC' },
+    { id: 4, name: 'Smartphone' },
+  ];
+
+  private products: Product[] = [
+    // 20 товаров (4 категории по 5)
+    // !!! Вставь реальные kaspi.kz ссылки
+    { id: 1, categoryId: 1, name: 'Маи Сакурадзима.10 см', description: 'Маи Сакурадзима.10 см', price: 9500, rating: 5, image: 'https://resources.cdn-kaspi.kz/img/m/p/hb7/h7e/70307116187678.jpg?format=gallery-medium', link: 'https://kaspi.kz/shop/p/mai-sakuradzima-10-sm-109461789/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', likes: 45 },
+    { id: 2,
+      categoryId: 1,
+      name: 'Твоя апрельская ложь. Том 1', 
+      description: 'Косэй Арима - пианист-вундеркинд, бросивший музыку после смерти матери. Лишённые какой-либо цели, его будни были монотонны и бесцветны. Он вёл обычную школьную жизнь со своими друзьями, Цубаки и Ватари, пока однажды его не познакомили с Каори Миядзоно, красивой, своевольной и невероятно талантливой скрипачкой, и его дни вновь начали наполняться красками. . . ', 
+      price: 7500, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/hdc/h10/64241518673950.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/arakava-n-tvoja-aprel-skaja-lozh-tom-1-101100320/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 14
+     },
+     { id: 3,
+      categoryId: 1,
+      name: 'Карты Таро JoJo Tarot 78 карт', 
+      description: 'Карты Таро JoJo Tarot 78 карт', 
+      price: 4500, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/h71/hb8/69997565476894.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/jojo-tarot-78-kart-109319032/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 45
+     },
+     { id: 4,
+      categoryId: 1,
+      name: ' Kakegurui Аниме холст на подрамнике 40x60 см', 
+      description: ' Kakegurui Аниме холст на подрамнике 40x60 см', 
+      price: 11000, 
+      rating: 0, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p9e/pdc/3286277.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/bezumnye-karty-kakegurui-anime-holst-na-podramnike-40x60-sm-128554918/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 45
+     },
+     { id: 5,
+      categoryId: 1,
+      name: 'Блич капитан Хицугая Тоширо 14.5 см 14.5 см 1 шт', 
+      description: 'Блич капитан Хицугая Тоширо 14.5 см 14.5 см 1 шт', 
+      price: 6900, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/h39/h3d/85091052060702.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/figurka-blich-kapitan-hitsugaja-toshiro-14-5-sm-14-5-sm-1-sht-116422071/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 76
+     },
+     { id: 6,
+      categoryId: 2,
+      name: 'Devil May Cry 5 Steelbook + Devil May Cry 5 Special Edition PS5 RUS SUB', 
+      description: 'DEVIL MAY CRY ВОЗВРАЩАЕТСЯ, ДЕТКА! Встречайте лучшую версию легендарного экшена. Новые особенности: — Новый игровой персонаж — Вергилий, брат и заклятый враг Данте', 
+      price: 39900, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p18/pa1/67269885.png?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/devil-may-cry-5-steelbook-devil-may-cry-5-special-edition-ps5-rus-146423886/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 71
+     },
+     { id: 7,
+      categoryId: 2,
+      name: 'Battlefield 1 Steelbook + Battlefield 1 Revolution Xbox One RUS', 
+      description: 'Вступайте в мощное игровое сообщество Battlefield и откройте для себя зарю мировых войн в масштабных командных сетевых боях или в одиночной кампании с увлекательными военными историями', 
+      price: 37990, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/pd8/p1b/67098945.jpeg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/battlefield-1-steelbook-battlefield-1-revolution-146375385/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 69
+     },
+     { id: 8,
+      categoryId: 2,
+      name: 'Silent Hill 2 PS5 RUS SUB', 
+      description: 'Легендарная серия игр в жанре психологического ужаса возвращается! Окунитесь в леденящую кровь атмосферу с современной графикой и пугающе реалистичными звуками.', 
+      price: 24481, 
+      rating: 5, 
+      image: 'https://i.ebayimg.com/images/g/kLYAAOSwuwJkNaXz/s-l1200.jpg', 
+      link: 'https://kaspi.kz/shop/p/silent-hill-2-ps5-rus-128354917/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 32
+     },
+     { id: 9,
+      categoryId: 2,
+      name: 'Silent Hill f - Day One Edition PS5 RUS PS5 RUS SUB', 
+      description: 'В 1960-х годах в Японии уединённый городок Эбисугаока, в котором жила Симидзу Хинако, окутал внезапный туман, превративший её дом в настоящий кошмар.', 
+      price: 38990, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/pca/p62/68801858.jpeg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/silent-hill-f---day-one-edition-ps5-rus-146858177/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 41
+     },
+     { id: 10,
+      categoryId: 2,
+      name: 'Mortal Kombat 11 PS4 RUS', 
+      description: 'Mortal Kombat 11 для PS4 — захватывающий файтинг, который предлагает уникальный игровой опыт для нескольких игроков. Погрузитесь в мир жестоких боёв и эпических сражений, где каждый персонаж обладает уникальными способностями и стилем боя.', 
+      price: 13398, 
+      rating: 5, 
+      image: 'https://lifehacker.ru/wp-content/uploads/2019/01/IMG_5212_1556017975.jpg', 
+      link: 'https://kaspi.kz/shop/p/mortal-kombat-11-ps4-rus-112782703/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 482
+     },
+     { id: 11,
+      categoryId: 3,
+      name: 'LINEUP i5-12400F / RTX 4060 8 Гб / 32 Гб / SSD 1048 Гб / Win 11 Pro', 
+      description: 'Процессор: Intel Core i5-12400F  Память: 2x16gb 32GB DDR4 RAM', 
+      price: 583399, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p04/p54/76205796.png?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/lineup-lineup-full-dest-chernyi-134259788/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 4551
+     },
+     { id: 12,
+      categoryId: 3,
+      name: 'GoodGame i5-14400F / RTX 5060 Ti 16 Гб / 32 Гб / SSD 1000 Гб / Win 11 Pro', 
+      description: 'GoodGame i5-14400F / RTX 5060 Ti 16 Гб / 32 Гб / SSD 1000 Гб / Win 11 Pro', 
+      price: 857000, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/pc4/p19/35994026.jpeg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/goodgame-i514400f5060ti16gb-belyi-137927437/?c=750000000', 
+      likes: 410
+     },
+     { id: 13,
+      categoryId: 3,
+      name: 'BestGamer i5-14400F / RTX 5060 8 Гб / 32 Гб / SSD 1000 Гб / Win 11 Pro', 
+      description: 'BestGamer i5-14400F / RTX 5060 8 Гб / 32 Гб / SSD 1000 Гб / Win 11 Pro', 
+      price: 612500, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p86/p15/85394212.png?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/bestgamer-i5-14400f-rtx-5060-ozu-32-gb-ssd-1-tb-windows-11-pro-belyi-142923257/?c=750000000', 
+      likes: 1488
+     },
+     { id: 14,
+      categoryId: 3,
+      name: 'KompTrust / 8 Гб / 32 Гб / SSD 1024 Гб / Win 11 Pro', 
+      description: 'KompTrust / 8 Гб / 32 Гб / SSD 1024 Гб / Win 11 Pro', 
+      price: 587000, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/h7d/hdc/82159240380446.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/komptrust-i5-12400f-rtx-4060-ti-32gb-1024-ssd-win-11-pro-112032610/?c=750000000', 
+      likes: 621
+     },
+     { id: 15,
+      categoryId: 3,
+      name: 'GoodGame i5-14400F / RTX 5060 8 Гб / 32 Гб / SSD 1000 Гб / Win 11 Pro', 
+      description: 'GoodGame i5-14400F / RTX 5060 8 Гб / 32 Гб / SSD 1000 Гб / Win 11 Pro', 
+      price: 700000, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p6e/pac/42311427.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/goodgame-i5-14th5060-belyi-139676244/?c=750000000', 
+      likes: 41
+     },
+     { id: 16,
+      categoryId: 4,
+      name: 'Смартфон Poco C71 4 ГБ/128 ГБ золотистый + подарок', 
+      description: 'ыыыыы покофон', 
+      price: 74990, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/pb0/p51/67021800.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/poco-c71-4-gb-128-gb-zolotistyi-podarok-138553679/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 75
+     },
+     { id: 17,
+      categoryId: 4,
+      name: 'Смартфон Motorola moto g05 4 ГБ/256 ГБ синий', 
+      description: 'Смартфон Motorola moto g05 4 ГБ/256 ГБ синий', 
+      price: 84990, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p08/pe4/27208289.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/motorola-moto-g05-4-gb-256-gb-sinii-135408366/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 364
+     },
+     { id: 18,
+      categoryId: 4,
+      name: 'Смартфон OnePlus 13R 16 ГБ/512 ГБ черный', 
+      description: 'Смартфон OnePlus 13R 16 ГБ/512 ГБ черный', 
+      price: 429000, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p41/p59/16843253.jpg?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/oneplus-13r-16-gb-512-gb-chernyi-132466758/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 744
+     },
+     { id: 19,
+      categoryId: 4,
+      name: 'Смартфон Redmi Note 14 NFC 6 ГБ/128 ГБ черный', 
+      description: 'Смартфон Redmi Note 14 NFC 6 ГБ/128 ГБ черный', 
+      price: 114990, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/pcb/p5c/27603533.png?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/redmi-note-14-nfc-6-gb-128-gb-chernyi-135538184/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 750
+     },
+     { id: 20,
+      categoryId: 4,
+      name: 'Смартфон Samsung Galaxy A26 5G 8 ГБ/256 ГБ черный + подарок', 
+      description: 'Смартфон Samsung Galaxy A26 5G 8 ГБ/256 ГБ черный + подарок', 
+      price: 160098, 
+      rating: 5, 
+      image: 'https://resources.cdn-kaspi.kz/img/m/p/p92/p90/34445706.png?format=gallery-medium', 
+      link: 'https://kaspi.kz/shop/p/samsung-galaxy-a26-5g-8-gb-256-gb-chernyi-podarok-137493710/?c=750000000&utm_source=google&utm_medium=cpc&utm_campaign=shop_google_search_sports_and_outdoors_sports_nutrition_brand&gbraid=0AAAAAC7-v7j-6MGOAcCWyy4ggZDZNWQAY&gclid=CjwKCAiAkvDMBhBMEiwAnUA9BbOYop9N-bwrXwSF7lXOXeqGj2zNMkUhdpSpgGR6hv4eKxSZiz-zoBoCgZMQAvD_BwE', 
+      likes: 204
+     },
+  ];
+
+  getCategories(): Category[] {
+    return this.categories;
+  }
+
+  getProducts(): Product[] {
+    return this.products.map(p => ({ ...p }));
+  }
+}
