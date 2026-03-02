@@ -12,7 +12,6 @@ Each subfolder represents an individual project or lab assignment focused on bui
 - <img src="https://raw.githubusercontent.com/github/explore/main/topics/css/css.png" width="20"/> **CSS3**
 - <img src="https://raw.githubusercontent.com/github/explore/main/topics/javascript/javascript.png" width="20"/> **JavaScript**
 - <img src="https://raw.githubusercontent.com/github/explore/main/topics/typescript/typescript.png" width="20"/> **TypeScript**
-- Responsive layout practices
 
 <div align="center">
 <kbd>
