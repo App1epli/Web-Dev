@@ -1,0 +1,47 @@
+.card {
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  max-width: 700px;
+}
+
+.row {
+  display: grid;
+  gap: 6px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+button {
+  border: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.secondary {
+  background: #efefef;
+}
+
+.info {
+  padding: 10px 0;
+  opacity: 0.8;
+}
+
+.error {
+  padding: 10px 0;
+  color: #b00020;
+}
